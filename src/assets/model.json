@@ -1,0 +1,37 @@
+{
+  "rows": [
+    {
+      "class": "row",
+      "columns": [
+        {
+          "class": "col-md-4",
+          "widgets": [
+            {
+              "title": "News Widget 1",
+              "type": "news"
+            },
+            {
+              "title": "News Widget 2",
+              "type": "news",
+              "config": {
+                "service": "http://rss.golem.de/rss.php?feed=ATOM1.0"
+              }
+            }
+          ]
+        },
+        {
+          "class": "col-md-8",
+          "widgets": [
+            {
+              "title": "News Widget 3",
+              "type": "news",
+              "config": {
+                "service": "https://www.scm-manager.org/feed/"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

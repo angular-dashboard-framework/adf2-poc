@@ -1,0 +1,22 @@
+<div class="alert alert-info" *ngIf="!feed">
+  Please insert a feed url in the widget configuration
+</div>
+<div *ngIf="feed">
+  <h3>
+    <a [href]="feed.link" target="_blank">
+      {{feed.title}}
+    </a>
+  </h3>
+  <p>{{feed.description}}</p>
+  <div class="media" *ngFor="let entry of feed.entries">
+    <div class="media-body">
+      <h4 class="media-heading">
+        <a [href]="entry.link" target="_blank">
+          {{entry.title}}
+        </a>
+      </h4>
+      <p>{{entry.contentSnippet}}</p>
+      <small>{{entry.author}}, {{entry.publishedDate | date: 'yyyy-MM-dd HH:mm'}}</small>
+    </div>
+  </div>
+</div>

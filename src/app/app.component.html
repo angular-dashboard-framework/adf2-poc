@@ -1,3 +1,8 @@
-<h1>
-  {{title}}
-</h1>
+<div class="container">
+  <div *ngIf="error" class="alert alert-error">
+    {{error}}
+  </div>
+  <div *ngIf="model">
+    <dashboard [title]="title" [model]="model"></dashboard>
+  </div>
+</div>

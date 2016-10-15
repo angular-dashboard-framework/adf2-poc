@@ -1,4 +1,6 @@
-# Adf
+# ADF2 PoC
+
+Proof of concept for porting the [angular-dashboard-framework](https://github.com/angular-dashboard-framework/angular-dashboard-framework) to Angular 2.
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.15.
 

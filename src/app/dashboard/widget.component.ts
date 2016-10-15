@@ -17,6 +17,7 @@ import { WidgetConfigChanged, EditModeCanceled } from './widget.events';
 
 @Component({
   selector: 'adf-widget',
+  styleUrls: ['widget.component.css'],
   templateUrl: 'widget.component.html'
 })
 export class WidgetComponent implements OnInit, OnDestroy {

@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 
 import { DashboardService } from './dashboard.service';
 import { WidgetComponent } from './widget.component';
@@ -15,7 +16,7 @@ import { DashboardComponent } from './dashboard.component';
     DashboardComponent
   ],
   exports: [DashboardComponent],
-  imports: [CommonModule],
+  imports: [CommonModule, DragulaModule],
   providers: [DashboardService]
 })
 export class DashboardModule {}

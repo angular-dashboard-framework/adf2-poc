@@ -13,6 +13,7 @@ import { NewsConfiguration } from './news.configuration';
 export class NewsWidgetComponent implements OnInit {
 
   feed: any;
+  error: string;
   configuration: NewsConfiguration;
 
   constructor(
@@ -25,7 +26,10 @@ export class NewsWidgetComponent implements OnInit {
   ngOnInit(){
     if (this.configuration.service){
       this.newsService.getFeed(this.configuration.service)
-          .subscribe(feed => this.feed = feed);
+          .subscribe(
+            feed => this.feed = feed,
+            error => this.error = error
+          );
     }
   }
 

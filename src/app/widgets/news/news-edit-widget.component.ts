@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { WidgetContext } from '../../dashboard/widget.context';
 import { Widget } from '../../dashboard/widget';
@@ -10,7 +10,7 @@ import { NewsConfiguration } from './news.configuration';
   templateUrl: 'news-edit-widget.component.html',
   styleUrls: ['news-edit-widget.component.css']
 })
-export class NewsEditWidgetComponent implements OnInit {
+export class NewsEditWidgetComponent {
 
   configuration: NewsConfiguration;
 
@@ -18,9 +18,6 @@ export class NewsEditWidgetComponent implements OnInit {
     private context: WidgetContext
   ){
     this.configuration = context.getConfig();
-  }
-
-  ngOnInit(){
   }
 
   save() {

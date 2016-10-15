@@ -1,5 +1,8 @@
-<div class="alert alert-info" *ngIf="!feed">
+<div class="alert alert-info" *ngIf="!feed && !error">
   Please insert a feed url in the widget configuration
+</div>
+<div class="alert alert-danger" *ngIf="error">
+  Failed to load feed: {{error}}
 </div>
 <div *ngIf="feed">
   <h3>

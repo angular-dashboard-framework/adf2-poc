@@ -1,7 +1,6 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { WidgetContext } from '../../dashboard/widget.context';
-import { Widget } from '../../dashboard/widget';
 
 import { NewsService } from './news.service';
 import { NewsConfiguration } from './news.configuration';
@@ -19,12 +18,12 @@ export class NewsWidgetComponent implements OnInit {
   constructor(
     private newsService: NewsService,
     private context: WidgetContext
-  ){
+  ) {
     this.configuration = context.getWidet().config || {};
   }
 
-  ngOnInit(){
-    if (this.configuration.service){
+  ngOnInit() {
+    if (this.configuration.service) {
       this.newsService.getFeed(this.configuration.service)
           .subscribe(
             feed => this.feed = feed,

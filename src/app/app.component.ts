@@ -3,8 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { DashboardService } from './dashboard/dashboard.service';
 import { NewsWidgetComponent, NewsEditWidgetComponent } from './widgets/news';
 
-import { Model, WidgetDescriptor } from './dashboard'
-import { Observable } from 'rxjs';
+import { Model } from './dashboard';
 import { AppService } from './app.service';
 
 // Add the RxJS Observable operators we need in this app.
@@ -23,13 +22,13 @@ export class AppComponent implements OnInit {
   error: string;
 
   constructor(
-    private appService : AppService,
+    private appService: AppService,
     private dashboardService: DashboardService
-  ){}
+  ) {}
 
   ngOnInit() {
     // register widgets
-    this.dashboardService.register("news", {
+    this.dashboardService.register('news', {
       component: NewsWidgetComponent,
       editComponent: NewsEditWidgetComponent
     });

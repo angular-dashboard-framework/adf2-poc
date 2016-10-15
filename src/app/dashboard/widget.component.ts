@@ -34,18 +34,18 @@ export class WidgetComponent implements OnInit, OnDestroy {
 
   constructor(
     private dashboardService: DashboardService,
-    private resolver : ComponentFactoryResolver
-  ){}
+    private resolver: ComponentFactoryResolver
+  ) {}
 
   ngOnInit() {
     this.context = new WidgetContext(this.widget);
     this.context.widgetEvents.subscribe(event => this.onWidgetEvent(event));
 
     this.descriptor = this.dashboardService.get(this.widget.type);
-    if (this.descriptor){
+    if (this.descriptor) {
       this.renderComponent(this.descriptor.component);
     } else {
-      this.error = "could not find widget " + this.widget.type;
+      this.error = 'could not find widget ' + this.widget.type;
     }
   }
 
@@ -54,7 +54,7 @@ export class WidgetComponent implements OnInit, OnDestroy {
   }
 
   onWidgetEvent(event: Object) {
-    if (event instanceof WidgetConfigChanged){
+    if (event instanceof WidgetConfigChanged) {
       this.configChanged(<WidgetConfigChanged>event);
     } else if (event instanceof EditModeCanceled) {
       this.cancelEditMode();
@@ -65,12 +65,12 @@ export class WidgetComponent implements OnInit, OnDestroy {
     this.toggleEditMode();
   }
 
-  private configChanged(event: WidgetConfigChanged){
+  private configChanged(event: WidgetConfigChanged) {
       this.widget.config = event.configuration;
       this.toggleEditMode();
   }
 
-  private renderComponent(component: Type<any>){
+  private renderComponent(component: Type<any>) {
     let factory = this.resolver.resolveComponentFactory(component);
 
     let widgetContextProvider = {
@@ -85,17 +85,17 @@ export class WidgetComponent implements OnInit, OnDestroy {
     this.content.insert(componentRef.hostView);
   }
 
-  toggleEditMode(){
-    if (this.descriptor){
+  toggleEditMode() {
+    if (this.descriptor) {
       this.editMode = !this.editMode;
       this.content.remove();
-      if (this.editMode){
+      if (this.editMode) {
         this.renderComponent(this.descriptor.editComponent);
       } else {
         this.renderComponent(this.descriptor.component);
       }
     } else {
-      this.error = "could not find widget " + this.widget.type;
+      this.error = 'could not find widget ' + this.widget.type;
     }
   }
 }

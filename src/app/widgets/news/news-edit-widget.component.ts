@@ -1,9 +1,6 @@
 import { Component } from '@angular/core';
 
 import { WidgetContext } from '../../dashboard/widget.context';
-import { Widget } from '../../dashboard/widget';
-
-import { NewsService } from './news.service';
 import { NewsConfiguration } from './news.configuration';
 
 @Component({
@@ -16,7 +13,7 @@ export class NewsEditWidgetComponent {
 
   constructor(
     private context: WidgetContext
-  ){
+  ) {
     this.configuration = context.getConfig();
   }
 

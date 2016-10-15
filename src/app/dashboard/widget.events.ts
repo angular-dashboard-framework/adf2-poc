@@ -1,6 +1,6 @@
 export class WidgetConfigChanged {
 
-  constructor(public configuration: any){}
+  constructor(public configuration: any) {}
 
 }
 

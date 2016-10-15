@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule, JsonpModule } from '@angular/http';
+import { HttpModule } from '@angular/http';
 
 import { DashboardModule } from './dashboard/dashboard.module';
 import { NewsModule } from './widgets/news/news.module';

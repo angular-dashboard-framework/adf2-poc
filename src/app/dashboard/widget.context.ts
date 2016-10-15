@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { Widget } from './widget';
 import { WidgetConfigChanged, EditModeCanceled } from './widget.events';
@@ -13,8 +13,8 @@ export class WidgetContext {
   widgetEvents: Observable<Object>;
 
   constructor(
-    private widget: Widget,
-  ){
+    private widget: Widget
+  ) {
     this.widgetEvents = Observable.create(observer => this.eventObserver = observer);
   }
 
@@ -35,7 +35,7 @@ export class WidgetContext {
     this.eventObserver.next(new WidgetConfigChanged(config));
   }
 
-  destroy(){
+  destroy() {
     this.eventObserver.complete();
   }
 

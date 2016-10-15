@@ -1,12 +1,14 @@
 import {
   Component,
   OnInit,
+  OnDestroy,
   Input,
+  Output,
   ComponentFactoryResolver,
   ViewContainerRef,
   ReflectiveInjector,
   ViewChild,
-  ApplicationRef,
+  EventEmitter,
   Type
 } from '@angular/core';
 import { Widget } from './widget';
@@ -18,7 +20,7 @@ import { DashboardService } from './dashboard.service';
   selector: 'widget',
   templateUrl: 'widget.component.html'
 })
-export class WidgetComponent implements OnInit {
+export class WidgetComponent implements OnInit, OnDestroy {
 
   @Input()
   widget: Widget;
@@ -26,10 +28,9 @@ export class WidgetComponent implements OnInit {
   @ViewChild('content', {read: ViewContainerRef})
   content: ViewContainerRef;
 
+  context: WidgetContext;
   editMode = false;
-
   descriptor: WidgetDescriptor;
-
   error: string;
 
   constructor(
@@ -38,6 +39,9 @@ export class WidgetComponent implements OnInit {
   ){}
 
   ngOnInit() {
+    this.context = new WidgetContext(this.widget);
+    this.context.widgetEvents.subscribe(event => this.onWidgetEvent(event));
+
     this.descriptor = this.dashboardService.get(this.widget.type);
     if (this.descriptor){
       this.renderComponent(this.descriptor.component);
@@ -46,12 +50,21 @@ export class WidgetComponent implements OnInit {
     }
   }
 
+  ngOnDestroy() {
+    this.context.destroy();
+  }
+
+  onWidgetEvent(config: Object) {
+    this.widget.config = config;
+    this.toggleEditMode();
+  }
+
   renderComponent(component: Type<any>){
     let factory = this.resolver.resolveComponentFactory(component);
 
     let widgetContextProvider = {
       provide: WidgetContext,
-      useValue: new WidgetContext(this.widget)
+      useValue: this.context
     };
 
     let resolvedProviders = ReflectiveInjector.resolve([widgetContextProvider]);

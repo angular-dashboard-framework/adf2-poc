@@ -1,1 +1,6 @@
-<p>edit</p>
+<h4>News Configuration</h4>
+<div class="form-group">
+  <label for="url">Feed URL</label>
+  <input type="url" class="form-control" id="url" required [(ngModel)]="configuration.service">
+</div>
+<button type="submit" class="btn btn-primary" (click)="save()">Save</button>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 
 import { WidgetContext } from '../../dashboard/widget.context';
 import { Widget } from '../../dashboard/widget';
@@ -17,10 +17,15 @@ export class NewsEditWidgetComponent implements OnInit {
   constructor(
     private context: WidgetContext
   ){
-    this.configuration = context.getWidet().config || {};
+    this.configuration = context.getConfig();
   }
 
   ngOnInit(){
+  }
+
+  save() {
+    // TODO modify original configuration here, not before
+    this.context.configChanged(this.configuration);
   }
 
 }

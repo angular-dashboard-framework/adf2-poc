@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Row } from './row';
 
 @Component({
-  selector: 'row',
+  selector: 'adf-row',
   templateUrl: 'row.component.html'
 })
 export class RowComponent {

@@ -16,7 +16,7 @@ import { DashboardService } from './dashboard.service';
 import { WidgetConfigChanged, EditModeCanceled } from './widget.events';
 
 @Component({
-  selector: 'widget',
+  selector: 'adf-widget',
   templateUrl: 'widget.component.html'
 })
 export class WidgetComponent implements OnInit, OnDestroy {

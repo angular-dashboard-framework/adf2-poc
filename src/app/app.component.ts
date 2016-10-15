@@ -10,7 +10,7 @@ import { AppService } from './app.service';
 import './rxjs-operators';
 
 @Component({
-  selector: 'app-root',
+  selector: 'adf-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })

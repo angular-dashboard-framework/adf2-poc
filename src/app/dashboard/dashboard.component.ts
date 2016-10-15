@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Model } from './model';
 
 @Component({
-    selector: 'dashboard',
+    selector: 'adf-dashboard',
     templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent {

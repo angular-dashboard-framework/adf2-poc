@@ -3,7 +3,6 @@ import {
   OnInit,
   OnDestroy,
   Input,
-  Output,
   ComponentFactoryResolver,
   ViewContainerRef,
   ReflectiveInjector,
@@ -80,7 +79,7 @@ export class WidgetComponent implements OnInit, OnDestroy {
     };
 
     let resolvedProviders = ReflectiveInjector.resolve([widgetContextProvider]);
-    let injector = ReflectiveInjector.fromResolvedProviders(resolvedProviders, this.content.parentInjector);
+    let injector = ReflectiveInjector.fromResolvedProviders(resolvedProviders, this.content.injector);
 
     let componentRef = factory.create(injector);
     this.content.insert(componentRef.hostView);

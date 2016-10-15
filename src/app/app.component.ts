@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 
 import { DashboardService } from './dashboard/dashboard.service';
-import { NewsWidgetComponent } from './widgets/news-widget.component';
+import { NewsWidgetComponent, NewsEditWidgetComponent } from './widgets/news';
 
-import { Model } from './dashboard'
+import { Model, WidgetDescriptor } from './dashboard'
 import { Observable } from 'rxjs';
 import { AppService } from './app.service';
 
 // Add the RxJS Observable operators we need in this app.
 import './rxjs-operators';
-
 
 @Component({
   selector: 'app-root',
@@ -23,11 +22,17 @@ export class AppComponent implements OnInit {
   model: Model;
   error: string;
 
-  constructor(private appService : AppService, private dashboardService: DashboardService){}
+  constructor(
+    private appService : AppService,
+    private dashboardService: DashboardService
+  ){}
 
   ngOnInit() {
     // register widgets
-    this.dashboardService.register("news", NewsWidgetComponent);
+    this.dashboardService.register("news", {
+      component: NewsWidgetComponent,
+      editComponent: NewsEditWidgetComponent
+    });
 
     // fetch model
     this.appService.getModel().subscribe(

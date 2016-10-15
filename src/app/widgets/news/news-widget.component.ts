@@ -1,7 +1,8 @@
 import { Component, OnInit, Inject } from '@angular/core';
 
-import { WidgetContext } from '../dashboard/widget.context';
-import { Widget } from '../dashboard/widget';
+import { WidgetContext } from '../../dashboard/widget.context';
+import { Widget } from '../../dashboard/widget';
+
 import { NewsService } from './news.service';
 import { NewsConfiguration } from './news.configuration';
 

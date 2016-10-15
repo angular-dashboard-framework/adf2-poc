@@ -11,6 +11,10 @@
               "type": "news"
             },
             {
+              "title": "GitHub Widget",
+              "type": "github"
+            },
+            {
               "title": "News Widget 2",
               "type": "news",
               "config": {

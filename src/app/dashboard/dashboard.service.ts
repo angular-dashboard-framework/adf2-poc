@@ -1,19 +1,20 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 
 import { Http, Response } from '@angular/http';
 import { Observable }     from 'rxjs/Observable';
 
+import { WidgetDescriptor } from './widget.descriptor';
+
 @Injectable()
 export class DashboardService {
 
-  widgets: Map<String,any> = new Map<String,any>()
+  widgets: Map<String,WidgetDescriptor> = new Map<String,WidgetDescriptor>()
 
-  register(name: string, widget: any){
-    this.widgets.set(name, widget);
+  register(name: string, descriptor: WidgetDescriptor){
+    this.widgets.set(name, descriptor);
   }
 
-  get(name: string): any {
+  get(name: string): WidgetDescriptor {
     return this.widgets.get(name);
   }
-
 }

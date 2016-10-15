@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import {Widget} from './widget';
+import { Widget } from './widget';
 
 @Injectable()
 export class WidgetContext {

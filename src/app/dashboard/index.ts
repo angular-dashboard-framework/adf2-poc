@@ -1,5 +1,6 @@
 export * from './widget';
 export * from './widget.component';
+export * from './widget.descriptor';
 export * from './column';
 export * from './column.component';
 export * from './row';

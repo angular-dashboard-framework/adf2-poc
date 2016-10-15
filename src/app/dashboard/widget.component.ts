@@ -8,13 +8,13 @@ import {
   ViewContainerRef,
   ReflectiveInjector,
   ViewChild,
-  EventEmitter,
   Type
 } from '@angular/core';
 import { Widget } from './widget';
 import { WidgetContext } from './widget.context';
 import { WidgetDescriptor } from './widget.descriptor';
 import { DashboardService } from './dashboard.service';
+import { WidgetConfigChanged, EditModeCanceled } from './widget.events';
 
 @Component({
   selector: 'widget',
@@ -54,12 +54,24 @@ export class WidgetComponent implements OnInit, OnDestroy {
     this.context.destroy();
   }
 
-  onWidgetEvent(config: Object) {
-    this.widget.config = config;
+  onWidgetEvent(event: Object) {
+    if (event instanceof WidgetConfigChanged){
+      this.configChanged(<WidgetConfigChanged>event);
+    } else if (event instanceof EditModeCanceled) {
+      this.cancelEditMode();
+    }
+  }
+
+  private cancelEditMode() {
     this.toggleEditMode();
   }
 
-  renderComponent(component: Type<any>){
+  private configChanged(event: WidgetConfigChanged){
+      this.widget.config = event.configuration;
+      this.toggleEditMode();
+  }
+
+  private renderComponent(component: Type<any>){
     let factory = this.resolver.resolveComponentFactory(component);
 
     let widgetContextProvider = {

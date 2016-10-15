@@ -24,8 +24,11 @@ export class NewsEditWidgetComponent implements OnInit {
   }
 
   save() {
-    // TODO modify original configuration here, not before
     this.context.configChanged(this.configuration);
+  }
+
+  cancel() {
+    this.context.cancelEditMode();
   }
 
 }

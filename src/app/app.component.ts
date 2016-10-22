@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DashboardService } from './dashboard/dashboard.service';
+import { WidgetService } from './dashboard/widget.service';
+import { StructureService } from './dashboard/structure.service';
 import { NewsWidgetComponent, NewsEditWidgetComponent } from './widgets/news';
 
 import { Model } from './dashboard';
@@ -23,14 +24,28 @@ export class AppComponent implements OnInit {
 
   constructor(
     private appService: AppService,
-    private dashboardService: DashboardService
+    private widgetService: WidgetService,
+    private structureService: StructureService
   ) {}
 
   ngOnInit() {
     // register widgets
-    this.dashboardService.register('news', {
+    this.widgetService.register('news', {
       component: NewsWidgetComponent,
       editComponent: NewsEditWidgetComponent
+    });
+
+    // register structures
+    this.structureService.register('4-8', {
+      'rows': [{
+        'columns': [{
+          'id': '4',
+          'class': 'col-md-4'
+        },{
+          'id': '8',
+          'class': 'col-md-8'
+        }]
+      }]
     });
 
     // fetch model

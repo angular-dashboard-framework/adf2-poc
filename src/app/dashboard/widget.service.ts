@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
+
 import { WidgetDescriptor } from './widget.descriptor';
 
 @Injectable()
-export class DashboardService {
+export class WidgetService {
 
-  widgets: Map<String, WidgetDescriptor> = new Map<String, WidgetDescriptor>();
+  private idCounter = 0;
+  private widgets: Map<String, WidgetDescriptor> = new Map<String, WidgetDescriptor>();
 
   register(name: string, descriptor: WidgetDescriptor) {
     this.widgets.set(name, descriptor);
@@ -13,4 +15,10 @@ export class DashboardService {
   get(name: string): WidgetDescriptor {
     return this.widgets.get(name);
   }
+
+  id(): string {
+    return 'w-' + new Date().getTime() + '-' + (this.idCounter++);
+  }
+
+  constructor() { }
 }

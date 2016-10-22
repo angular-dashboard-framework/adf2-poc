@@ -1,14 +1,14 @@
 <div class="panel panel-default">
 	<div class="panel-heading">
-		{{widget.title}}
+		{{widget.title}} ({{widget.id}})
 		<span class="pull-right">
       <!-- open edit mode -->
       <a *ngIf="descriptor && descriptor.editComponent" title="Edit Mode" (click)="toggleEditMode()">
         <i class="glyphicon glyphicon-cog"></i>
       </a>
       <!-- change widget location -->
-      <a title="Move widget" class="adf-move" class="adf-handle">
-        <i class="glyphicon glyphicon-move"></i>
+      <a title="Move widget" class="adf-move" class="adf-handle-outer">
+        <i class="glyphicon glyphicon-move adf-handle"></i>
       </a>
     </span>
 	</div>

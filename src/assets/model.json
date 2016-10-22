@@ -1,41 +1,44 @@
 {
-  "rows": [
+  "title": "Dashboard with new model",
+  "structure": "4-8",
+  "widgets": [
     {
-      "class": "row",
-      "columns": [
-        {
-          "class": "col-md-4",
-          "widgets": [
-            {
-              "title": "News Widget 1",
-              "type": "news"
-            },
-            {
-              "title": "GitHub Widget",
-              "type": "github"
-            },
-            {
-              "title": "News Widget 2",
-              "type": "news",
-              "config": {
-                "service": "http://rss.golem.de/rss.php?feed=ATOM1.0"
-              }
-            }
-          ]
-        },
-        {
-          "class": "col-md-8",
-          "widgets": [
-            {
-              "title": "News Widget 3",
-              "type": "news",
-              "config": {
-                "service": "https://www.scm-manager.org/feed/"
-              }
-            }
-          ]
-        }
-      ]
+      "title": "News Widget 1",
+      "type": "news",
+      "position": {
+        "column": "4",
+        "order": 0
+      }
+    },
+    {
+      "title": "GitHub Widget",
+      "type": "github",
+      "position": {
+        "column": "4",
+        "order": 1
+      }
+    },
+    {
+      "title": "News Widget 2",
+      "type": "news",
+      "config": {
+        "service": "http://rss.golem.de/rss.php?feed=ATOM1.0"
+      },
+      "position": {
+        "column": "4",
+        "order": 2
+      }
+    },
+    {
+      "title": "News Widget 3",
+      "type": "news",
+      "config": {
+        "service": "https://www.scm-manager.org/feed/"
+      },
+      "position": {
+        "column": "8",
+        "order": 0
+      }
     }
   ]
 }

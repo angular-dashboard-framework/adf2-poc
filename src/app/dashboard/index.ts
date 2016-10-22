@@ -6,4 +6,5 @@ export * from './column.component';
 export * from './row';
 export * from './row.component';
 export * from './model';
+export * from './structure';
 export * from './dashboard.component';

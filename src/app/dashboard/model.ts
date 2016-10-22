@@ -1,6 +1,10 @@
-import { Row } from './row';
+import { Widget } from './widget';
 
 export interface Model {
-  class?: string;
-  rows: Row[];
+  // title of the dashboard
+  title: string;
+  // id of dashboard structure
+  structure: string;
+  // widgets
+  widgets: Widget[];
 }

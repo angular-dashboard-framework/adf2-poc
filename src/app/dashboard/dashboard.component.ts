@@ -1,15 +1,18 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation, OnInit } from '@angular/core';
 import { Model } from './model';
+import { Structure } from './structure';
 
-import { DragulaService } from 'ng2-dragula/ng2-dragula';
+import { DndService, DndEvent } from './dnd.service';
+import { StructureService } from './structure.service';
+
 
 @Component({
     selector: 'adf-dashboard',
     styleUrls: ['dashboard.component.css'],
     templateUrl: 'dashboard.component.html',
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 
     @Input()
     title: string;
@@ -17,12 +20,25 @@ export class DashboardComponent {
     @Input()
     model: Model;
 
-    constructor(private dragulaService: DragulaService) {
-      dragulaService.setOptions('adf-bag', {
-        moves: function (el, container, handle) {
-          return handle.className === 'adf-handle';
-        }
-      });
+    @Input()
+    structureId: string;
+
+    structure: Structure;
+
+    constructor(
+      private dndService: DndService,
+      private structureService: StructureService
+    ) {
+      dndService.subscribe(event => this.handleDndEvent(event));
+    }
+
+    ngOnInit() {
+      this.structure = this.structureService.get(this.structureId);
+      // todo handle structure not found error
+    }
+
+    private handleDndEvent(event: DndEvent) {
+      this.dndService.synchronizeModel(this.model, event);
     }
 
 }

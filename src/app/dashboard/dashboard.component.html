@@ -1,5 +1,5 @@
 <h1>{{title}}</h1>
 
 <div class="dashboard">
-    <adf-row *ngFor="let row of model.rows" [row]="row"></adf-row>
+    <adf-row *ngFor="let row of structure.rows" [model]="model" [row]="row"></adf-row>
 </div>

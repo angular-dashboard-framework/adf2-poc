@@ -12,7 +12,7 @@ import {
 import { Widget } from './widget';
 import { WidgetContext } from './widget.context';
 import { WidgetDescriptor } from './widget.descriptor';
-import { DashboardService } from './dashboard.service';
+import { WidgetService } from './widget.service';
 import { WidgetConfigChanged, EditModeCanceled } from './widget.events';
 
 @Component({
@@ -34,15 +34,18 @@ export class WidgetComponent implements OnInit, OnDestroy {
   error: string;
 
   constructor(
-    private dashboardService: DashboardService,
+    private widgetService: WidgetService,
     private resolver: ComponentFactoryResolver
   ) {}
 
   ngOnInit() {
+    if (!this.widget.id) {
+      this.widget.id = this.widgetService.id();
+    }
     this.context = new WidgetContext(this.widget);
     this.context.widgetEvents.subscribe(event => this.onWidgetEvent(event));
 
-    this.descriptor = this.dashboardService.get(this.widget.type);
+    this.descriptor = this.widgetService.get(this.widget.type);
     if (this.descriptor) {
       this.renderComponent(this.descriptor.component);
     } else {
@@ -80,7 +83,7 @@ export class WidgetComponent implements OnInit, OnDestroy {
     };
 
     let resolvedProviders = ReflectiveInjector.resolve([widgetContextProvider]);
-    let injector = ReflectiveInjector.fromResolvedProviders(resolvedProviders, this.content.injector);
+    let injector = ReflectiveInjector.fromResolvedProviders(resolvedProviders, this.content.parentInjector);
 
     let componentRef = factory.create(injector);
     this.content.insert(componentRef.hostView);

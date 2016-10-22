@@ -1,6 +1,7 @@
-import { Widget } from './widget';
+import { Row } from './row';
+import { IdAware } from './idaware';
 
-export interface Column {
+export interface Column extends IdAware {
   class?: string;
-  widgets: Widget[];
+  rows?: Row[];
 }

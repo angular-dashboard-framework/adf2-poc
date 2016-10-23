@@ -20,8 +20,6 @@ export class ColumnComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    console.log(this.model);
-
     let columnWidgets: Widget[] = [];
 
     // find widget of column
@@ -35,5 +33,28 @@ export class ColumnComponent implements OnInit {
     this.widgets = columnWidgets.sort((left: Widget, right: Widget) => {
         return left.position.order - right.position.order;
     });
+  }
+
+  remove(widget: Widget) {
+    if (this.removeWidgetFromView(widget)) {
+      this.removeWidgetFromModel(widget);
+    }
+  }
+
+  private removeWidgetFromModel(widget: Widget): boolean {
+    return this.removeItemFromArray(this.model.widgets, widget);
+  }
+
+  private removeWidgetFromView(widget: Widget): boolean {
+    return this.removeItemFromArray(this.widgets, widget);
+  }
+
+  private removeItemFromArray(array: Object[], item: Object): boolean {
+    let index = array.indexOf(item);
+    if (index >= 0) {
+      array.splice(index, 1);
+      return true;
+    }
+    return false;
   }
 }

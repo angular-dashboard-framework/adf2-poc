@@ -3,13 +3,16 @@ import {
   OnInit,
   OnDestroy,
   Input,
+  Output,
   ComponentFactoryResolver,
   ViewContainerRef,
   ComponentRef,
   ReflectiveInjector,
   ViewChild,
-  Type
+  Type,
+  EventEmitter
 } from '@angular/core';
+
 import { Widget } from './widget';
 import { WidgetContext } from './widget.context';
 import { WidgetDescriptor } from './widget.descriptor';
@@ -30,6 +33,9 @@ export class WidgetComponent implements OnInit, OnDestroy {
   @ViewChild('content', {read: ViewContainerRef})
   content: ViewContainerRef;
 
+  @Output()
+  removeEvent: EventEmitter<Widget>;
+
   componentRef: ComponentRef<any>;
 
   context: WidgetContext;
@@ -40,7 +46,9 @@ export class WidgetComponent implements OnInit, OnDestroy {
   constructor(
     private widgetService: WidgetService,
     private resolver: ComponentFactoryResolver
-  ) {}
+  ) {
+    this.removeEvent = new EventEmitter<Widget>();
+  }
 
   ngOnInit() {
     if (!this.widget.id) {
@@ -85,6 +93,13 @@ export class WidgetComponent implements OnInit, OnDestroy {
     } else {
       this.error = 'could not find widget ' + this.widget.type;
     }
+  }
+
+  /**
+   * Notify parent column to remove widget from view and model.
+   */
+  remove() {
+    this.removeEvent.emit(this.widget);
   }
 
   private cancelEditMode() {

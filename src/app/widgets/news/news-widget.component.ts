@@ -31,17 +31,6 @@ export class NewsWidgetComponent implements OnInit, WidgetFunctionProvider {
     return [
       WidgetFunctions.refresh(this.fetchFeed)
     ];
-    /*return [{
-      title: 'Refresh',
-      description: 'Reload the Widget',
-      class: 'glyphicon glyphicon-refresh',
-      isAvailable: function(ctx: WidgetContext) {
-        return true;
-      },
-      execute: function(ctx: WidgetContext){
-        this.fetchFeed();
-      }
-    }];*/
   }
 
   private fetchFeed() {

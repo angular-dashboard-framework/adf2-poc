@@ -15,14 +15,31 @@ export class ColumnComponent implements OnInit {
   @Input()
   model: Model;
 
+  dropBag: string;
+
   widgets: Widget[] = [];
 
   constructor() {}
 
   ngOnInit() {
-    let columnWidgets: Widget[] = [];
+    if ( ! this.isRowColumn() ) {
+      this.widgets = this.findColumnWidgets();
+      this.enableDropZone();
+    }
+  }
 
-    // find widget of column
+  remove(widget: Widget) {
+    if (this.removeWidgetFromView(widget)) {
+      this.removeWidgetFromModel(widget);
+    }
+  }
+
+  private enableDropZone() {
+    this.dropBag = 'adfBag';
+  }
+
+  private findColumnWidgets(): Widget[] {
+    let columnWidgets: Widget[] = [];
     for (let widget of this.model.widgets) {
       if (widget.position.column === this.column.id ) {
         columnWidgets.push(widget);
@@ -30,15 +47,13 @@ export class ColumnComponent implements OnInit {
     }
 
     // column widgets
-    this.widgets = columnWidgets.sort((left: Widget, right: Widget) => {
+    return columnWidgets.sort((left: Widget, right: Widget) => {
         return left.position.order - right.position.order;
     });
   }
 
-  remove(widget: Widget) {
-    if (this.removeWidgetFromView(widget)) {
-      this.removeWidgetFromModel(widget);
-    }
+  private isRowColumn() {
+    return this.column.rows && this.column.rows.length > 0;
   }
 
   private removeWidgetFromModel(widget: Widget): boolean {

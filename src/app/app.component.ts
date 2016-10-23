@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     private appService: AppService,
     private widgetService: WidgetService,
     private structureService: StructureService
-  ) {}
+  ) { }
 
   ngOnInit() {
     // register widgets
@@ -41,7 +41,24 @@ export class AppComponent implements OnInit {
           'class': 'col-md-4'
         }, {
           'id': '8',
-          'class': 'col-md-8'
+          'class': 'col-md-8',
+          'rows': [{
+            'columns': [{
+              'id': '8/1/1',
+              'class': 'col-md-6',
+            }, {
+              'id': '8/1/2',
+              'class': 'col-md-6',
+            }]
+          }, {
+            'columns': [{
+              'id': '8/2/1',
+              'class': 'col-md-6',
+            }, {
+              'id': '8/2/2',
+              'class': 'col-md-6',
+            }]
+          }]
         }]
       }]
     });

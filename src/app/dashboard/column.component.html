@@ -1,7 +1,10 @@
-<div [class]="column.class" [attr.adf-id]="column.id" [dragula]='"adf-bag"'>
+<div [class]="column.class" [attr.adf-id]="column.id" [dragula]='dropBag'>
+    <!-- render widget of column -->
     <adf-widget *ngFor="let widget of widgets"
                 [widget]="widget"
                 [attr.adf-id]="widget.id"
                 (removeEvent)="remove($event)">
     </adf-widget>
+    <!-- render nested rows -->
+    <adf-row *ngFor="let row of column.rows" [model]="model" [row]="row"></adf-row>
 </div>

@@ -41,7 +41,7 @@ export class AppComponent implements OnInit {
         'columns': [{
           'id': '4',
           'class': 'col-md-4'
-        },{
+        }, {
           'id': '8',
           'class': 'col-md-8'
         }]

@@ -32,7 +32,7 @@ export class WidgetFunctions {
         return !context.editMode;
       },
       execute: executor
-    }
+    };
   }
 
 }

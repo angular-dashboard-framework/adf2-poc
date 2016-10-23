@@ -1,6 +1,7 @@
 import { WidgetContext } from './widget.context';
 
 declare type WidgetExecute = (context: WidgetContext) => void;
+declare type WidgetIsAvailable = (context: WidgetContext) => boolean;
 
 /**
  * Provider for custom widget functions. A widget component can
@@ -23,14 +24,17 @@ export interface WidgetFunction {
 
 export class WidgetFunctions {
 
-  public static refresh(executor: WidgetExecute): WidgetFunction {
+  public static refresh(executor: WidgetExecute, available?: WidgetIsAvailable): WidgetFunction {
+    if (!available) {
+      available = function(context: WidgetContext) {
+        return !context.editMode;
+      };
+    }
     return {
       title: 'Refresh',
       description: 'Reload the Widget',
       class: 'glyphicon glyphicon-refresh',
-      isAvailable(context: WidgetContext): boolean {
-        return !context.editMode;
-      },
+      isAvailable: available,
       execute: executor
     };
   }

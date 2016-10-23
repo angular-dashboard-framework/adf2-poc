@@ -113,8 +113,7 @@ export class WidgetComponent implements OnInit, OnDestroy {
     this.functions = [];
     if (this.isWidgetFunctionProvider(this.componentRef.instance)) {
       for (let fn of this.componentRef.instance.getFunctions()) {
-        console.log(fn);
-        if (fn.isAvailable(this.context)) {
+        if (fn.isAvailable.bind(this.componentRef.instance)(this.context)) {
           this.functions.push(fn);
         }
       }

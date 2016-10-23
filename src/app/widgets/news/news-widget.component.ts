@@ -29,8 +29,12 @@ export class NewsWidgetComponent implements OnInit, WidgetFunctionProvider {
 
   getFunctions(): WidgetFunction[] {
     return [
-      WidgetFunctions.refresh(this.fetchFeed)
+      WidgetFunctions.refresh(this.fetchFeed, this.isRefreshAvailable)
     ];
+  }
+
+  private isRefreshAvailable(): boolean {
+    return !this.context.editMode && this.configuration.service !== null && this.configuration.service !== undefined;
   }
 
   private fetchFeed() {

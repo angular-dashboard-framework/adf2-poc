@@ -1,5 +1,7 @@
-<h1>{{title}}</h1>
+<div class="dashboard-container">
+  <h1>{{model.title}}</h1>
 
-<div class="dashboard">
-    <adf-row *ngFor="let row of structure.rows" [model]="model" [row]="row"></adf-row>
+  <div class="dashboard">
+      <adf-row *ngFor="let row of structure.rows" [model]="model" [row]="row"></adf-row>
+  </div>
 </div>

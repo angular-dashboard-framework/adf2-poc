@@ -15,9 +15,6 @@ import { StructureService } from './structure.service';
 export class DashboardComponent implements OnInit {
 
     @Input()
-    title: string;
-
-    @Input()
     model: Model;
 
     @Input()
@@ -35,6 +32,9 @@ export class DashboardComponent implements OnInit {
     ngOnInit() {
       this.structure = this.structureService.get(this.structureId);
       // todo handle structure not found error
+      if (!this.model.title) {
+        this.model.title = 'Dashboard';
+      }
     }
 
     private handleDndEvent(event: DndEvent) {

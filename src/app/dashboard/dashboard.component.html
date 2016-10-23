@@ -1,7 +1,11 @@
 <div class="dashboard-container">
   <h1>{{model.title}}</h1>
 
-  <div class="dashboard">
+  <div class="alert alert-danger" *ngIf="error">
+    {{error}}
+  </div>
+
+  <div class="dashboard" *ngIf="structure">
       <adf-row *ngFor="let row of structure.rows" [model]="model" [row]="row"></adf-row>
   </div>
 </div>

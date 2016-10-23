@@ -17,8 +17,6 @@ import './rxjs-operators';
 })
 export class AppComponent implements OnInit {
 
-  title = 'Dashboard Application';
-
   model: Model;
   error: string;
 

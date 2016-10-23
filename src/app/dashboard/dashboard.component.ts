@@ -17,9 +17,7 @@ export class DashboardComponent implements OnInit {
     @Input()
     model: Model;
 
-    @Input()
-    structureId: string;
-
+    error: string;
     structure: Structure;
 
     constructor(
@@ -30,10 +28,18 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-      this.structure = this.structureService.get(this.structureId);
-      // todo handle structure not found error
       if (!this.model.title) {
         this.model.title = 'Dashboard';
+      }
+
+      let structureId = this.model.structure;
+      if (structureId) {
+        this.structure = this.structureService.get(structureId);
+        if (!this.structure) {
+          this.error = 'could not find structure with id ' + structureId;
+        }
+      } else {
+        this.error = 'model does not define structure';
       }
     }
 

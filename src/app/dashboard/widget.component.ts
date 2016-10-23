@@ -5,6 +5,7 @@ import {
   Input,
   ComponentFactoryResolver,
   ViewContainerRef,
+  ComponentRef,
   ReflectiveInjector,
   ViewChild,
   Type
@@ -13,6 +14,7 @@ import { Widget } from './widget';
 import { WidgetContext } from './widget.context';
 import { WidgetDescriptor } from './widget.descriptor';
 import { WidgetService } from './widget.service';
+import { WidgetFunctionProvider, WidgetFunction } from './widget.functions';
 import { WidgetConfigChanged, EditModeCanceled } from './widget.events';
 
 @Component({
@@ -28,10 +30,12 @@ export class WidgetComponent implements OnInit, OnDestroy {
   @ViewChild('content', {read: ViewContainerRef})
   content: ViewContainerRef;
 
+  componentRef: ComponentRef<any>;
+
   context: WidgetContext;
-  editMode = false;
   descriptor: WidgetDescriptor;
   error: string;
+  functions: WidgetFunction[];
 
   constructor(
     private widgetService: WidgetService,
@@ -65,6 +69,24 @@ export class WidgetComponent implements OnInit, OnDestroy {
     }
   }
 
+  executeFunction(fn: WidgetFunction) {
+    fn.execute.bind(this.componentRef.instance)(this.context);
+  }
+
+  toggleEditMode() {
+    if (this.descriptor) {
+      this.context.editMode = !this.context.editMode;
+      this.content.remove();
+      if ( this.context.editMode ) {
+        this.renderComponent(this.descriptor.editComponent);
+      } else {
+        this.renderComponent(this.descriptor.component);
+      }
+    } else {
+      this.error = 'could not find widget ' + this.widget.type;
+    }
+  }
+
   private cancelEditMode() {
     this.toggleEditMode();
   }
@@ -85,21 +107,21 @@ export class WidgetComponent implements OnInit, OnDestroy {
     let resolvedProviders = ReflectiveInjector.resolve([widgetContextProvider]);
     let injector = ReflectiveInjector.fromResolvedProviders(resolvedProviders, this.content.parentInjector);
 
-    let componentRef = factory.create(injector);
-    this.content.insert(componentRef.hostView);
+    this.componentRef = factory.create(injector);
+    this.content.insert(this.componentRef.hostView);
+
+    this.functions = [];
+    if (this.isWidgetFunctionProvider(this.componentRef.instance)) {
+      for (let fn of this.componentRef.instance.getFunctions()) {
+        console.log(fn);
+        if (fn.isAvailable(this.context)) {
+          this.functions.push(fn);
+        }
+      }
+    }
   }
 
-  toggleEditMode() {
-    if (this.descriptor) {
-      this.editMode = !this.editMode;
-      this.content.remove();
-      if (this.editMode) {
-        this.renderComponent(this.descriptor.editComponent);
-      } else {
-        this.renderComponent(this.descriptor.component);
-      }
-    } else {
-      this.error = 'could not find widget ' + this.widget.type;
-    }
+  private isWidgetFunctionProvider(component: any): component is WidgetFunctionProvider {
+    return component.getFunctions !== undefined;
   }
 }

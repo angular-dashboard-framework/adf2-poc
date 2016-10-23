@@ -7,8 +7,12 @@
         <i class="glyphicon glyphicon-cog"></i>
       </a>
       <!-- change widget location -->
-      <a title="Move widget" class="adf-move" class="adf-handle-outer">
+      <a title="Move widget" class="adf-move adf-handle-outer">
         <i class="glyphicon glyphicon-move adf-handle"></i>
+      </a>
+      <!-- custom widget functions, provided by implemeting WidgetFunctionProvider -->
+      <a *ngFor="let fn of functions" [title]="fn.title" (click)="executeFunction(fn)">
+        <i [class]="fn.class"></i>
       </a>
     </span>
 	</div>

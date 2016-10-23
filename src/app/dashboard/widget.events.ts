@@ -7,3 +7,7 @@ export class WidgetConfigChanged {
 export class EditModeCanceled {
 
 }
+
+export class EditModeEnabled {
+
+}

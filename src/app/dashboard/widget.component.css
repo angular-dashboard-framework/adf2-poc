@@ -1,4 +1,9 @@
-.adf-handle-outer {
+.panel-heading a {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.panel-heading a.adf-handle-outer {
   cursor: move;
   cursor: grab;
   cursor: -moz-grab;

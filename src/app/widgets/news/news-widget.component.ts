@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { WidgetContext } from '../../dashboard/widget.context';
+import { WidgetFunction, WidgetFunctionProvider, WidgetFunctions } from '../../dashboard/widget.functions';
 
 import { NewsService } from './news.service';
 import { NewsConfiguration } from './news.configuration';
@@ -9,7 +10,7 @@ import { NewsConfiguration } from './news.configuration';
   templateUrl: 'news-widget.component.html',
   styleUrls: ['news-widget.component.css']
 })
-export class NewsWidgetComponent implements OnInit {
+export class NewsWidgetComponent implements OnInit, WidgetFunctionProvider {
 
   feed: any;
   error: string;
@@ -23,6 +24,27 @@ export class NewsWidgetComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.fetchFeed();
+  }
+
+  getFunctions(): WidgetFunction[] {
+    return [
+      WidgetFunctions.refresh(this.fetchFeed)
+    ];
+    /*return [{
+      title: 'Refresh',
+      description: 'Reload the Widget',
+      class: 'glyphicon glyphicon-refresh',
+      isAvailable: function(ctx: WidgetContext) {
+        return true;
+      },
+      execute: function(ctx: WidgetContext){
+        this.fetchFeed();
+      }
+    }];*/
+  }
+
+  private fetchFeed() {
     if (this.configuration.service) {
       this.newsService.getFeed(this.configuration.service)
           .subscribe(

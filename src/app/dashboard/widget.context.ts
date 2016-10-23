@@ -11,6 +11,7 @@ export class WidgetContext {
 
   private eventObserver: Observer<Object>;
   widgetEvents: Observable<Object>;
+  editMode = false;
 
   constructor(
     private widget: Widget

@@ -7,6 +7,8 @@ import { NewsEditWidgetComponent } from './news-edit-widget.component';
 import { NewsWidgetComponent } from './news-widget.component';
 import { NewsService } from './news.service';
 
+import { WidgetService } from '../../dashboard/widget.service';
+
 @NgModule({
   declarations: [NewsWidgetComponent, NewsEditWidgetComponent],
   exports: [NewsWidgetComponent, NewsEditWidgetComponent],
@@ -14,4 +16,13 @@ import { NewsService } from './news.service';
   providers: [NewsService],
   entryComponents: [NewsWidgetComponent, NewsEditWidgetComponent]
 })
-export class NewsModule {}
+export class NewsModule {
+
+  constructor(widgetService: WidgetService) {
+    widgetService.register('news', {
+      component: NewsWidgetComponent,
+      editComponent: NewsEditWidgetComponent
+    });
+  }
+
+}
